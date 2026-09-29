@@ -8,4 +8,5 @@ target
 pkg.generated.mbti
 # Local MoonBit diagnostic output
 *-check.log
-*-test.log*-info.log
+*-test.log
+*-info.log
