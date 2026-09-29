@@ -13,7 +13,7 @@ name = "sujy123456/ledgerweave"
 
 version = "0.2.0"
 
-readme = "README.mbt.md"
+readme = "README.md"
 
 repository = "https://github.com/sujy123456/project_3"
 
