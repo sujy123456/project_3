@@ -12,6 +12,7 @@ jobs:
       - uses: hustcer/setup-moonbit@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: moon update
       - run: moon fmt --check
       - run: moon check --target native
       - run: moon test --target native
