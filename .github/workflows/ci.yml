@@ -21,4 +21,4 @@ jobs:
           moon run --target native cmd/main --
           examples/csv/orders.csv examples/csv/payments.csv
           examples/csv/refunds.csv examples/csv/adjustments.csv 40
-      - run: moon publish --dry-run
+      - run: moon info
