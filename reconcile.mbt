@@ -1,26 +1,4 @@
 ///|
-fn classify_balance(
-  order : OrderRecord,
-  outstanding : Int,
-  refunded : Int,
-  policy : Policy,
-) -> Resolution {
-  if refunded >
-    sum_captured(
-      { orders: [order], payments: [], refunds: [], adjustments: [], },
-      order.id,
-    ) {
-    NeedsReview
-  } else if outstanding > policy.amount_tolerance_minor {
-    AwaitingPayment
-  } else if outstanding < -policy.amount_tolerance_minor {
-    OverCollected
-  } else {
-    Settled
-  }
-}
-
-///|
 fn balance_for_order(
   input : LedgerInput,
   order : OrderRecord,
