@@ -4,3 +4,5 @@ target/
 target
 .mooncakes/
 .moonagent/
+# Generated MoonBit interface cache
+pkg.generated.mbti
