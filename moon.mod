@@ -11,7 +11,7 @@
 
 name = "sujy123456/ledgerweave"
 
-version = "0.1.0"
+version = "0.2.0"
 
 readme = "README.mbt.md"
 
@@ -19,8 +19,12 @@ repository = "https://github.com/sujy123456/project_3"
 
 license = "Apache-2.0"
 
-keywords = [ ]
+keywords = [ "ledger", "reconciliation", "data-quality", "csv" ]
 
-preferred_target = "wasm"
+preferred_target = "native"
 
 description = "Deterministic multi-source business ledger reconciliation and exception attribution."
+
+import {
+  "moonbitlang/async@0.21.3",
+}

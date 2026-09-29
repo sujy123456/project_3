@@ -1,0 +1,2 @@
+id,order_id,currency,amount_minor,day,direction,reason
+ADJ-1,ORD-200,CNY,500,2,credit,shipping

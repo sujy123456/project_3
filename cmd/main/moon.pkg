@@ -1,4 +1,7 @@
 import {
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/core/env",
   "sujy123456/ledgerweave",
 }
 

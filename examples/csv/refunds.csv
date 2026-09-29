@@ -1,0 +1,2 @@
+id,order_id,currency,amount_minor,refunded_day,reason
+REF-1,ORD-100,CNY,2000,4,partial return

@@ -1,7 +1,11 @@
 # Third-party notices
 
-LedgerWeave 0.1.0 has no third-party runtime or build dependencies beyond the MoonBit toolchain and its standard library.
+LedgerWeave 0.2.0 uses the following public dependency:
 
-The project source is original for this repository and is licensed under Apache-2.0. Example records are synthetic and do not contain personal, financial, or production data.
+| Component | Version | Source | License | Use |
+| --- | --- | --- | --- | --- |
+| `moonbitlang/async` | 0.21.3 | https://mooncakes.io/docs/moonbitlang/async | Apache-2.0 | Native filesystem access for the CLI |
 
-If a future release adds a package or copied fixture, this file must list its name, version, source URL, license and compatibility review.
+The LedgerWeave source is original to this repository and licensed under Apache-2.0. Example records are synthetic and contain no personal, financial, or production data.
+
+Future additions must list the package, source URL, version, license and compatibility review here.

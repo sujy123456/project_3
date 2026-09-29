@@ -1,0 +1,5 @@
+id,order_id,currency,amount_minor,received_day,status
+PAY-1,ORD-100,CNY,12000,2,captured
+PAY-2,ORD-200,CNY,6000,3,captured
+PAY-3,ORD-300,USD,5000,3,captured
+PAY-4,MISSING,CNY,100,3,captured

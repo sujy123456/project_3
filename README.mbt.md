@@ -64,3 +64,17 @@ moon publish --dry-run
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE). The first release has no third-party runtime dependencies; details are recorded in `THIRD_PARTY_NOTICES.md`.
+
+## CSV command-line workflow
+
+The native CLI accepts four CSV files plus the current business day:
+
+```bash
+moon run --target native cmd/main -- \
+  examples/csv/orders.csv examples/csv/payments.csv \
+  examples/csv/refunds.csv examples/csv/adjustments.csv 40
+```
+
+The headers are fixed and intentional: `orders` requires `id,account_id,currency,amount_minor,created_day,status`; payments use `id,order_id,currency,amount_minor,received_day,status`; refunds use `id,order_id,currency,amount_minor,refunded_day,reason`; and adjustments use `id,order_id,currency,amount_minor,day,direction,reason`.
+
+CSV values may be quoted and use doubled quotes for literal quotes. Unreadable files terminate the native CLI through its explicit filesystem error boundary. Missing columns or malformed numeric values are converted to empty/zero fields and are subsequently surfaced by LedgerWeave validation instead of being silently accepted.

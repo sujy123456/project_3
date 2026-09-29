@@ -1,0 +1,4 @@
+id,account_id,currency,amount_minor,created_day,status
+ORD-100,acme,CNY,12000,1,paid
+ORD-200,acme,CNY,8000,1,paid
+ORD-300,beta,USD,5000,1,cancelled
