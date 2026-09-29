@@ -78,3 +78,15 @@ moon run --target native cmd/main -- \
 The headers are fixed and intentional: `orders` requires `id,account_id,currency,amount_minor,created_day,status`; payments use `id,order_id,currency,amount_minor,received_day,status`; refunds use `id,order_id,currency,amount_minor,refunded_day,reason`; and adjustments use `id,order_id,currency,amount_minor,day,direction,reason`.
 
 CSV values may be quoted and use doubled quotes for literal quotes. Unreadable files terminate the native CLI through its explicit filesystem error boundary. Missing columns or malformed numeric values are converted to empty/zero fields and are subsequently surfaced by LedgerWeave validation instead of being silently accepted.
+
+## Extended audit capabilities
+
+LedgerWeave also provides library APIs for operational reconciliation workflows:
+
+- `analytics.mbt`: severity, exception-code, currency, account and aging metrics.
+- `matching.mbt`: deterministic captured-payment allocation plans, unmatched payment detection and over-allocation tracking.
+- `quality.mbt`: pre-reconciliation source profiling with row-level quality issues.
+- `review.mbt`: owned exception cases, assignment rules, state transitions and overdue queues.
+- `export.mbt`: RFC-style escaped CSV and Markdown audit exports.
+
+These APIs are deterministic and do not mutate the original input records. The regression suite covers exact, excess, unmatched, voided and currency-conflicting payments; review lifecycle rules; source-quality defects; and export escaping.

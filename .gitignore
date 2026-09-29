@@ -6,3 +6,6 @@ target
 .moonagent/
 # Generated MoonBit interface cache
 pkg.generated.mbti
+# Local MoonBit diagnostic output
+*-check.log
+*-test.log
