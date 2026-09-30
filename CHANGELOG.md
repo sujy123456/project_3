@@ -14,3 +14,8 @@
 - Added input-quality profiling and row-level import diagnostics.
 - Added owned review-case workflow with assignment, decision and SLA checks.
 - Added CSV/Markdown audit exports and expanded regression coverage.
+
+## 0.3.0 - 2026-09-30
+
+- Restored reproducible installation, execution, example, testing and license guidance in the package README.
+- Published the documented audit-workflow release configuration as version 0.3.0.

@@ -32,3 +32,33 @@ LedgerWeave 是以 MoonBit 实现的多源业务流水对账与异常归因引�
 - 参考与依赖：运行时使用公开依赖 `moonbitlang/async@0.21.3` 支持 CLI 文件读取；其来源与 Apache-2.0 许可证已在仓库 `THIRD_PARTY_NOTICES.md` 中记录。CI 使用 `hustcer/setup-moonbit@v1` 安装 MoonBit，亦已记录其 MIT 许可证与用途。
 - 本项目许可证：Apache License 2.0（OSI 认可），许可证全文位于仓库 `LICENSE`。
 - 兼容性说明：项目未复制第三方业务代码、数据集或素材；示例流水均为合成数据，不含个人、真实财务或生产数据。
+## 安装、运行与示例
+
+**环境要求**：MoonBit 工具链，`moonc >= 0.10.14`。本项目以 `moonc v0.10.14` 验证。
+
+```bash
+moon update
+moon check --target native
+moon test --target native
+moon build --target native
+```
+
+仓库包含可直接执行的 CSV 最小样例：
+
+```bash
+moon run --target native cmd/main -- \
+  examples/csv/orders.csv examples/csv/payments.csv \
+  examples/csv/refunds.csv examples/csv/adjustments.csv 40
+```
+
+该示例会输出订单余额和异常报告。样例故意包含未知订单付款与已取消订单付款，因此结果为 `REVIEW REQUIRED`；这是对异常归因路径的可复现验证，而非命令失败。
+
+作为库使用时，调用 `@ledgerweave.reconcile(input, policy, current_day)` 获取 `ReconciliationResult`，再按需使用指标、分配、质量审计、复核队列与 CSV/Markdown 导出 API。详见 [架构说明](docs/architecture.md) 与 [申报书](docs/hackathon-application.md)。
+
+## 测试、CI 与质量边界
+
+GitHub Actions 在每次 push 与 pull request 上执行格式检查、依赖更新、原生检查、测试、构建、CSV 端到端示例和包元数据检查。项目以提供的输入和显式策略进行确定性对账；不连接银行、不发起资金操作、不提供税务或审计合规结论。
+
+## 开源许可证与第三方信息
+
+本项目使用 [Apache License 2.0](LICENSE)，属于 OSI 认可的开源许可证。运行时依赖、CI 依赖及其许可证来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
