@@ -554,3 +554,65 @@ test "CSV exports quote commas quotes and newlines" {
   let generated = render_currency_totals_csv([])
   assert_true(export_is_safe_csv(generated))
 }
+
+///|
+test "adjustment validation covers duplicate invalid blank and orphan paths" {
+  let input : LedgerInput = {
+    orders: [base_order("O-1", "team", 100, 1)],
+    payments: [],
+    refunds: [],
+    adjustments: [
+      {
+        id: "A-1",
+        order_id: "MISSING",
+        currency: "CNY",
+        amount_minor: 0,
+        day: 2,
+        direction: Credit,
+        reason: "",
+      },
+      {
+        id: "A-1",
+        order_id: "MISSING",
+        currency: "CNY",
+        amount_minor: 0,
+        day: 2,
+        direction: Debit,
+        reason: "",
+      },
+    ],
+  }
+  let findings = validate(input, default_policy())
+  let mut duplicate = false
+  let mut invalid_amount = false
+  let mut missing_reason = false
+  let mut unknown_order = false
+  for finding in findings {
+    if finding.code == DuplicateAdjustmentId {
+      duplicate = true
+    }
+    if finding.code == InvalidAmount {
+      invalid_amount = true
+    }
+    if finding.code == MissingReference {
+      missing_reason = true
+    }
+    if finding.code == UnknownOrder {
+      unknown_order = true
+    }
+  }
+  assert_true(duplicate)
+  assert_true(invalid_amount)
+  assert_true(missing_reason)
+  assert_true(unknown_order)
+}
+
+///|
+test "reports render both passing and review-required states" {
+  let clean = reconcile(clean_input(), default_policy(), 2)
+  let review = reconcile(demo_input(), default_policy(), 40)
+  assert_true(render_summary(clean).contains("PASS"))
+  assert_true(render_summary(review).contains("REVIEW REQUIRED"))
+  assert_true(render_balances(clean).contains("ORD-CLEAN"))
+  assert_true(render_findings(review).contains("unknown_order"))
+}
